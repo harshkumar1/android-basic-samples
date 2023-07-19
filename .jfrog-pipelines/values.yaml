@@ -1,7 +1,7 @@
 var:
   pipelineName: android_basic_sample
   gitProvider: hk_github_sample
-  path: harshkumar1/android-basic-sample
+  path: harshkumar1/android-basic-samples
   branches: main
   artifactory: hk_artifactory
   #repo: ??
