@@ -75,6 +75,8 @@ pipelines:
           forceXrayScan: false #optional
           failOnScan: false  #optional; default true
           autoPublishBuildInfo: false #optional
+          inputResources:
+            - name: {{ .Values.var.pipelineName }}_src_repo
           integrations:
               - name: {{ .Values.var.artifactory }}
         execution:
