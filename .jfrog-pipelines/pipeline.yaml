@@ -38,7 +38,7 @@ pipelines:
           #deployerRepo: <string>      #optional
           #usesPlugin: <string>  #optional
           useWrapper: true      #optional
-          forceXrayScan: true #optional
+          forceXrayScan: false #optional
           failOnScan: false  #optional; default true
           autoPublishBuildInfo: true #optional
           inputResources:
