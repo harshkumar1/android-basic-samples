@@ -29,6 +29,7 @@ pipelines:
       - name: build
         type: GradleBuild
         configuration:
+          affinityGroup: build_assemble
           #inherits all the tags from bash
           gradleCommand: "build" #required
           sourceLocation: "."  #optional
@@ -47,6 +48,39 @@ pipelines:
             - name: {{ .Values.var.pipelineName }}_build_info
           integrations:
             - name: {{ .Values.var.artifactory }}
+        execution:
+          onStart:
+            - echo "Preparing for work..."
+          onSuccess:
+            - echo "Job well done!"
+          onFailure:
+            - echo "uh oh, something went wrong"
+          onComplete: #always
+            - echo "Cleaning up some stuff"
+      - name: assemble
+        type: GradleBuild
+        configuration:
+          affinityGroup: build_assemble
+          inputSteps:
+            - name: build
+          #inherits all the tags from bash
+          gradleCommand: "assemble" #required
+          sourceLocation: "."  #optional
+          #configFileLocation: <string>  #optional
+          #configFileName: <string>  #optional
+          #resolverRepo: <string>  #optional
+          #deployerRepo: <string>      #optional
+          #usesPlugin: <string>  #optional
+          useWrapper: true      #optional
+          forceXrayScan: false #optional
+          failOnScan: false  #optional; default true
+          autoPublishBuildInfo: true #optional
+          inputResources:
+            - name: { { .Values.var.pipelineName } }_src_repo
+          outputResources:
+              - name: { { .Values.var.pipelineName } }_build_info
+          integrations:
+              - name: { { .Values.var.artifactory } }
         execution:
           onStart:
             - echo "Preparing for work..."
