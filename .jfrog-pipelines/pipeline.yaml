@@ -74,11 +74,7 @@ pipelines:
           useWrapper: true      #optional
           forceXrayScan: false #optional
           failOnScan: false  #optional; default true
-          autoPublishBuildInfo: true #optional
-          inputResources:
-            - name: { { .Values.var.pipelineName } }_src_repo
-          outputResources:
-              - name: { { .Values.var.pipelineName } }_build_info
+          autoPublishBuildInfo: false #optional
           integrations:
               - name: { { .Values.var.artifactory } }
         execution:
