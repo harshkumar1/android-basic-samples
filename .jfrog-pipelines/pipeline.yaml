@@ -76,7 +76,7 @@ pipelines:
           failOnScan: false  #optional; default true
           autoPublishBuildInfo: false #optional
           integrations:
-              - name: { { .Values.var.artifactory } }
+              - name: {{ .Values.var.artifactory }}
         execution:
           onStart:
             - echo "Preparing for work..."
